@@ -50,9 +50,25 @@ var webpackConfig = merge(baseWebpackConfig, {
     // you can customize output by editing /index.html
     // see https://github.com/ampedandwired/html-webpack-plugin
     new HtmlWebpackPlugin({
-      filename: config.build.index,
-      template: 'index.html',
+      filename: 'index.html',
+      template: './src/web/index.html',
       inject: true,
+      chunks: ['index'],
+      minify: {
+        removeComments: true,
+        collapseWhitespace: true,
+        removeAttributeQuotes: true
+        // more options:
+        // https://github.com/kangax/html-minifier#options-quick-reference
+      },
+      // necessary to consistently work with multiple chunks via CommonsChunkPlugin
+      chunksSortMode: 'dependency'
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'about.html',
+      template: './src/web/about.html',
+      inject: true,
+      chunks: ['about'],
       minify: {
         removeComments: true,
         collapseWhitespace: true,
